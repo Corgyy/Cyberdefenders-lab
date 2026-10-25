@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"44c2c3fe28ff516f","type":"text","text":"DEV$","x":-340,"y":-100,"width":100,"height":60},
+		{"id":"74e6517c57d7ff81","type":"text","text":"Event 261 = Có một thiết bị đang cố thiết lập kết nối tới RDP của máy Windows.\n\nMany event 26\nListener RDP-Tcp received a connection","x":-60,"y":-40,"width":281,"height":196},
+		{"id":"ae9d8976ad0afe68","type":"text","text":"2022-08-01 16:34:51 --> 16:34:57\nAdministrator","x":555,"y":18,"width":345,"height":80},
+		{"id":"912e0efe79ddf590","type":"text","text":"After many event 261:\n\n2022-08-01 16:34:57.526\nRDP\nUser authentication succeeded\nUser: administrator Domain: Source Network Address: 192.168.1.60","x":1260,"y":-73,"width":250,"height":263,"color":"1"},
+		{"id":"0295e0243506b79c","type":"text","text":"2022-08-01 16.32 --> 16.34\n6 distinct users (include administrator)\n","x":340,"y":-502,"width":250,"height":102},
+		{"id":"ae8e4b9cc0993640","type":"text","text":"SubStatus  0xc000006a: User logon with misspelled or bad password.","x":603,"y":280,"width":250,"height":120},
+		{"id":"de470bda41c41e82","x":853,"y":-491,"width":250,"height":80,"type":"text","text":"Re-login administrator at\n2022-08-01 16:46:10"}
+	],
+	"edges":[
+		{"id":"df5082cddbd692f7","fromNode":"44c2c3fe28ff516f","fromSide":"right","toNode":"74e6517c57d7ff81","toSide":"left"},
+		{"id":"741d4bdeae439680","fromNode":"74e6517c57d7ff81","fromSide":"right","toNode":"ae9d8976ad0afe68","toSide":"left","label":"failed (logon type = 3)"},
+		{"id":"9d5ca6d260f7f89b","fromNode":"ae9d8976ad0afe68","fromSide":"right","toNode":"912e0efe79ddf590","toSide":"left","label":"successful (logon type = 3)"},
+		{"id":"fda293f5697b14d1","fromNode":"44c2c3fe28ff516f","fromSide":"right","toNode":"0295e0243506b79c","toSide":"left","label":"successful login to many more users"},
+		{"id":"f82ae31a32728bf9","fromNode":"ae9d8976ad0afe68","fromSide":"bottom","toNode":"ae8e4b9cc0993640","toSide":"top"},
+		{"id":"e7b10091d2a174f6","fromNode":"0295e0243506b79c","fromSide":"right","toNode":"de470bda41c41e82","toSide":"left"}
+	]
+}
